@@ -1,18 +1,313 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <title>Foto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ID Jovem</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome para ícones idênticos aos prints -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Fonte Inter Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            brand: ['Montserrat', 'sans-serif']
+          },
+          colors: {
+            'app-blue': '#0a3875',
+            'app-card-blue': '#0b458c',
+            'app-orange': '#f28500',
+            'app-bg': '#f7f9fc'
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    * { box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; margin: 0; background: #000; }
-    body { display: grid; place-items: center; overflow: hidden; }
-    img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    /* Estilos personalizados para acabamento nativo de app */
+    body {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      background-color: #e5e7eb;
+    }
+
+    /* Container de proporção mobile estilo celular */
+    .mobile-frame {
+      max-width: 430px;
+      min-height: 100vh;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Efeito de toque suave nos cards */
+    .card-touch {
+      transition: all 0.18s ease-in-out;
+    }
+    .card-touch:active {
+      transform: scale(0.97);
+      background-color: #f1f5f9;
+    }
+
+    /* Gradiente idêntico da carteirinha ID Jovem */
+    .idjovem-gradient {
+      background: linear-gradient(135deg, #0077f7 0%, #2955d9 20%, #7b1fa2 50%, #c2185b 75%, #e91e63 88%, #ff4b1f 100%);
+    }
+
+    /* Texto vertical lateral da carteirinha */
+    .vertical-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Estilização para impressão direta da carteirinha */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    }
   </style>
 </head>
-<body>
-  <img src="foto.jpg" alt="Foto exibida pelo aplicativo">
+<body class="flex justify-center items-center min-h-screen font-sans text-slate-800 antialiased">
+
+  <!-- Container Mobile Principal -->
+  <div class="mobile-frame w-full bg-white relative flex flex-col justify-between overflow-x-hidden min-h-screen shadow-2xl">
+
+    <!-- ========================================== -->
+    <!-- 1. TELA INICIAL (DASHBOARD)               -->
+    <!-- ========================================== -->
+    <div id="homeScreen" class="flex flex-col flex-1 pb-24 transition-opacity duration-300">
+      
+      <!-- Header Principal -->
+      <header class="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-white">
+        <div class="w-10"></div> <!-- Espaçador para centralizar o título perfeitamente -->
+        <h1 class="text-2xl font-bold text-gray-900 tracking-tight">ID Jovem</h1>
+        <!-- Avatar Circular Laranja 'J' -->
+        <div class="w-11 h-11 rounded-full bg-app-orange flex items-center justify-center text-white font-bold text-xl shadow-sm cursor-pointer hover:opacity-95 transition" onclick="showToast('Perfil de Usuário')">
+          J
+        </div>
+      </header>
+
+      <!-- Imagem da Figura Superior Local (figura.jpg) -->
+      <div class="flex items-center justify-center pt-3 pb-1 px-4">
+        <img src="figura.jpg" 
+             alt="ID Jovem Ilustração" 
+             class="h-28 w-auto max-w-full object-contain mx-auto drop-shadow-sm select-none"
+             onerror="this.onerror=null; this.src='https://placehold.co/240x112/f7f9fc/0b458c?text=figura.jpg';">
+      </div>
+
+      <!-- Grade dos Botões / Cards (2 Colunas) -->
+      <main class="px-5 pt-1 pb-4 flex-1">
+        <div class="grid grid-cols-2 gap-4">
+
+          <!-- 1. Gerar ID Jovem -->
+          <div onclick="showToast('Ação demonstrativa. Acesse \'Minhas Carteirinhas\'.')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-address-card"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Gerar ID<br>Jovem
+            </span>
+          </div>
+
+          <!-- 2. MINHAS CARTEIRINHAS (BOTÃO PADRÃO SEM DESTAQUE) -->
+          <div id="btnMinhasCarteirinhas" onclick="openCarteirinhaScreen()" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-id-badge"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Minhas<br>Carteirinhas
+            </span>
+          </div>
+
+          <!-- 3. Perguntas Frequentes -->
+          <div onclick="showToast('Perguntas Frequentes em manutenção')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Perguntas<br>Frequentes
+            </span>
+          </div>
+
+          <!-- 4. Fale Conosco -->
+          <div onclick="showToast('Canal Fale Conosco')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Fale Conosco
+            </span>
+          </div>
+
+          <!-- 5. Programas da Juventude -->
+          <div onclick="showToast('Programas da Juventude')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Programas<br>da Juventude
+            </span>
+          </div>
+
+          <!-- 6. Notícias da Juventude -->
+          <div onclick="showToast('Notícias da Juventude')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-newspaper"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Notícias da<br>Juventude
+            </span>
+          </div>
+
+          <!-- 7. Cadastro Único -->
+          <div onclick="showToast('Cadastro Único')" 
+               class="card-touch bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 cursor-pointer min-h-[135px]">
+            <div class="text-app-card-blue text-4xl mb-2.5">
+              <i class="fa-solid fa-fingerprint"></i>
+            </div>
+            <span class="text-app-card-blue font-bold text-sm leading-snug">
+              Cadastro<br>Único
+            </span>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. TELA DA CARTEIRINHA EMITIDA COM SUCESSO -->
+    <!-- ========================================== -->
+    <div id="carteirinhaScreen" class="hidden flex-col flex-1 bg-white min-h-screen relative z-30 transition-opacity duration-300">
+      
+      <!-- Top Bar com Botão Fechar 'X' -->
+      <div class="flex items-center justify-between px-6 pt-5 pb-2">
+        <div class="w-6"></div> <!-- balanceador -->
+        <h2 class="text-lg font-bold text-gray-800 text-center tracking-tight">
+          Carteirinha Emitida com Sucesso!
+        </h2>
+        <!-- Botão 'X' para fechar e voltar -->
+        <button onclick="closeCarteirinhaScreen()" class="text-blue-700 hover:text-blue-900 text-2xl p-1 transition" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Área de Visualização da Carteirinha Local (carteirinha.jpg) -->
+      <div class="flex-1 flex flex-col items-center justify-center px-4 py-3" id="printArea">
+        <img id="cardImageFile" 
+             src="carteirinha.jpg" 
+             alt="Carteirinha ID Jovem" 
+             class="w-full max-w-[340px] rounded-[26px] shadow-2xl object-contain block mx-auto border border-gray-100"
+             onerror="this.onerror=null; this.src='https://placehold.co/340x510/0077f7/ffffff?text=carteirinha.jpg';">
+      </div>
+
+      <!-- Botão Azul Inferior 'Imprimir Carteirinha' -->
+      <div class="px-6 pb-8 pt-2">
+        <button onclick="imprimirCarteirinha()" 
+                class="w-full bg-[#1b58a8] hover:bg-[#144687] active:scale-[0.98] text-white font-semibold py-3.5 px-6 rounded-full shadow-lg transition duration-200 text-center text-base flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-print text-sm"></i>
+          <span>Imprimir Carteirinha</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. BARRA DE NAVEGAÇÃO INFERIOR FIXA       -->
+    <!-- ========================================== -->
+    <nav class="fixed sm:absolute bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-app-blue text-white flex justify-around items-center py-2.5 px-2 z-20 shadow-lg border-t border-blue-900/40">
+      
+      <!-- Página Inicial -->
+      <button onclick="closeCarteirinhaScreen()" class="flex flex-col items-center justify-center flex-1 py-1 hover:text-blue-200 transition">
+        <i class="fa-solid fa-house text-lg mb-1"></i>
+        <span class="text-[11px] font-medium tracking-tight">Página Inicial</span>
+      </button>
+
+      <!-- Minhas Carteirinhas (Funcional também no rodapé) -->
+      <button onclick="openCarteirinhaScreen()" class="flex flex-col items-center justify-center flex-1 py-1 text-white hover:text-blue-200 transition">
+        <i class="fa-solid fa-id-badge text-lg mb-1"></i>
+        <span class="text-[11px] font-semibold tracking-tight">Minhas Carteirinhas</span>
+      </button>
+
+      <!-- Fale Conosco -->
+      <button onclick="showToast('Abrindo canal Fale Conosco...')" class="flex flex-col items-center justify-center flex-1 py-1 hover:text-blue-200 transition">
+        <i class="fa-solid fa-comments text-lg mb-1"></i>
+        <span class="text-[11px] font-medium tracking-tight">Fale Conosco</span>
+      </button>
+
+    </nav>
+
+    <!-- Notificação Flutuante (Toast - substitui alert) -->
+    <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm text-white px-4 py-2.5 rounded-full text-xs font-medium opacity-0 pointer-events-none transition-all duration-300 z-50 shadow-xl max-w-xs text-center border border-gray-700">
+      Mensagem
+    </div>
+
+  </div>
+
+  <!-- Lógica JavaScript de Navegação e Interatividade -->
+  <script>
+    // Referências aos elementos
+    const homeScreen = document.getElementById('homeScreen');
+    const carteirinhaScreen = document.getElementById('carteirinhaScreen');
+    const toast = document.getElementById('toastNotification');
+
+    // Abre a tela da carteirinha diretamente
+    function openCarteirinhaScreen() {
+      homeScreen.classList.add('hidden');
+      carteirinhaScreen.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Fecha a tela da carteirinha e volta para a tela inicial
+    function closeCarteirinhaScreen() {
+      carteirinhaScreen.classList.add('hidden');
+      homeScreen.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Dispara a impressão do navegador
+    function imprimirCarteirinha() {
+      window.print();
+    }
+
+    // Toast informativo moderno sem usar alert()
+    let toastTimeout;
+    function showToast(text) {
+      clearTimeout(toastTimeout);
+      toast.innerText = text;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2400);
+    }
+  </script>
 </body>
 </html>
