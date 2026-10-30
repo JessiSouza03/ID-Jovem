@@ -37,23 +37,14 @@
     body {
       -webkit-tap-highlight-color: transparent;
       user-select: none;
-      background-color: #e5e7eb;
+      background-color: #ffffff;
     }
 
     /* Container de proporção mobile estilo celular */
     .mobile-frame {
       max-width: 430px;
       min-height: 100vh;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Efeito de toque suave nos cards */
-    .card-touch {
-      transition: all 0.18s ease-in-out;
-    }
-    .card-touch:active {
-      transform: scale(0.97);
-      background-color: #f1f5f9;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
     }
 
     /* Gradiente idêntico da carteirinha ID Jovem */
@@ -86,10 +77,10 @@
     }
   </style>
 </head>
-<body class="flex justify-center items-center min-h-screen font-sans text-slate-800 antialiased">
+<body class="flex justify-center items-center min-h-screen font-sans text-slate-800 antialiased bg-white">
 
   <!-- Container Mobile Principal -->
-  <div class="mobile-frame w-full bg-white relative flex flex-col justify-between overflow-x-hidden min-h-screen shadow-2xl">
+  <div class="mobile-frame w-full bg-white relative flex flex-col justify-between overflow-x-hidden min-h-screen">
 
     <!-- ========================================== -->
     <!-- 1. TELA INICIAL (DASHBOARD)               -->
@@ -218,20 +209,19 @@
       </div>
 
       <!-- Área de Visualização da Carteirinha Local (carteirinha.jpg) -->
-      <div class="flex-1 flex flex-col items-center justify-center px-4 py-3" id="printArea">
+      <div class="flex-1 flex flex-col items-center justify-center px-4 py-2 bg-white" id="printArea">
         <img id="cardImageFile" 
              src="carteirinha.jpg" 
              alt="Carteirinha ID Jovem" 
-             class="w-full max-w-[340px] rounded-[26px] shadow-2xl object-contain block mx-auto border border-gray-100"
-             onerror="this.onerror=null; this.src='https://placehold.co/340x510/0077f7/ffffff?text=carteirinha.jpg';">
+             class="w-full max-w-[350px] object-contain block mx-auto bg-white"
+             onerror="this.onerror=null; this.src='https://placehold.co/340x510/ffffff/0b458c?text=carteirinha.jpg';">
       </div>
 
-      <!-- Botão Azul Inferior 'Imprimir Carteirinha' -->
-      <div class="px-6 pb-8 pt-2">
+      <!-- Botão Azul Inferior 'Imprimir Carteirinha' Fiel à Imagem -->
+      <div class="flex justify-center items-center px-6 pt-3 pb-10 bg-white">
         <button onclick="imprimirCarteirinha()" 
-                class="w-full bg-[#1b58a8] hover:bg-[#144687] active:scale-[0.98] text-white font-semibold py-3.5 px-6 rounded-full shadow-lg transition duration-200 text-center text-base flex items-center justify-center space-x-2">
-          <i class="fa-solid fa-print text-sm"></i>
-          <span>Imprimir Carteirinha</span>
+                class="w-full max-w-[270px] bg-[#185cb8] hover:bg-[#144f9e] active:opacity-90 text-white font-normal text-[17px] py-3 px-6 rounded-full text-center transition duration-150 select-none shadow-none outline-none">
+          Imprimir Carteirinha
         </button>
       </div>
 
